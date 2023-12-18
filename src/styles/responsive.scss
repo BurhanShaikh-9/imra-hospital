@@ -1,0 +1,153 @@
+@media only screen and (max-width: 1200px) {
+    .App {
+        margin-left: 0;
+    }
+
+    .sidebar {
+        width: 0;
+        display: none;
+        transition: all 0.3s;
+    }
+
+    .sidebarwidth {
+        position: fixed;
+        display: block;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 350px;
+        z-index: 999;
+        transition: all 0.3s;
+        padding: 20px;
+        overflow-x: hidden;
+        box-shadow: 0px 0px 20px rgb(1 41 112 / 10%);
+        background-color: #fff;
+    }
+
+    .sideBarInner {
+        .aSideCloseButton {
+            display: block;
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+}
+
+@media only screen and (max-width: 768px) {
+    .sideBarInner .LogoImage {
+        padding-bottom: 40px;
+    }
+
+    .sidebarwidth {
+        width: 100%;
+    }
+
+    .mainSection .mainSectionWrapper .heading p {
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 0;
+        font-size: 28px;
+    }
+
+    .table > :not(caption) > * > * {
+        padding-right: 25px !important;
+    }
+
+    .mainSection .mainSectionWrapper .cardForm th {
+        font-weight: 600;
+        text-transform: capitalize;
+        text-align: left;
+        margin-right: 5px;
+    }
+
+    .mainSection .mainSectionWrapper .cardForm td {
+        text-align: left;
+        margin-right: 5px;
+    }
+
+    .mainSection .mainSectionWrapper .cardForm .pagination .next a,
+    .mainSection .mainSectionWrapper .cardForm .pagination .previous a {
+        text-decoration: none;
+    }
+    .mainSection .mainSectionWrapper .cardForm .additionForm .fields button {
+        margin: 0 auto;
+        display: inherit;
+    }
+    header .headerInner {
+        border-bottom: 1px solid #e7e7e7;
+    }
+
+    .mainSection {
+        padding: 20px 0 0;
+    }
+
+    .mainSection .mainSectionWrapper .cardForm .pagination {
+        margin-top: 20px;
+    }
+
+    .mainSection .mainSectionWrapper .cardForm .tableSearch {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .mainSection .card-body {
+        padding: 25px 18px;
+    }
+
+    .mainSection .mainSectionWrapper .cardForm .tableSearch input {
+        max-width: 80%;
+        width: 100%;
+        display: block;
+        padding: 8px 20px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .mainSection .mainSectionWrapper .cardForm {
+        width: 95%;
+    }
+
+    .ql-toolbar.ql-snow .ql-formats {
+        margin-right: 0;
+    }
+
+    .ql-snow .ql-picker.ql-header {
+        width: 77px !important;
+    }
+
+    // .EditorMain .editorButton button{
+    //   margin-top: 35px;
+    // }
+    .sidebar {
+        .sideBarInner {
+            .sidebar-nav {
+                .nav-item {
+                    .nav-link {
+                        padding: 10px 0;
+                    }
+                }
+            }
+        }
+    }
+
+    header {
+        .headerInner {
+            .navRight {
+                .aboutDoctor {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 476px) {
+    .EditorMain .editorButton button {
+        margin-top: 25px;
+    }
+}
+@media only screen and (max-width: 348px) {
+    .EditorMain .editorButton button {
+        margin-top: 60px;
+    }
+}
