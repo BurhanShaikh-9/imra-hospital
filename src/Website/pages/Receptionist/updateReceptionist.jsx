@@ -7,7 +7,7 @@ import Loader from '../../components/loader';
 import { ReceptionService } from '../../../services/receptionist';
 
 export const UpdateReception = () => {
-    const { hospitalId } = useParams();
+    const { receptionistId } = useParams();
     const { getSingleReceptionist, patchReceptionist } = ReceptionService();
 
     // const { patchUpdateHospital, getSingleHospital } = HospitalService();
@@ -31,15 +31,14 @@ export const UpdateReception = () => {
         setIsLoading(true)
         const formData = new FormData();
         formData.set('avatar', hospitalData.avatar);
-        formData.set('fullname', hospitalData.fullname);
+        formData.set('name', hospitalData.name);
         formData.set('email', hospitalData.email);
         formData.set('phonenumber', hospitalData.phonenumber);
-        formData.set('branch', hospitalData.branch);
         formData.set('address', hospitalData.address);
 
         // console.log(formData, 'hosss');
 
-        patchReceptionist(hospitalId, formData).then((res) => {
+        patchReceptionist(receptionistId, formData).then((res) => {
             toast.success('Receptionist Updated')
         }).catch((res) => {
             toast.error('Receptionist Failed to Update')
@@ -50,9 +49,9 @@ export const UpdateReception = () => {
     }
 
     useEffect(() => {
-        getSingleReceptionist(hospitalId).then((res) => {
+        getSingleReceptionist(receptionistId).then((res) => {
             console.log(res, 'response Receptionist');
-            const { __v, _id, ...newgetData } = res?.data?.hospital
+            const { __v, _id, ...newgetData } = res?.data?.reception
             setHospitalData(newgetData)
 
             // console.log(res)
@@ -103,7 +102,7 @@ export const UpdateReception = () => {
                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                                     <div className="fields">
                                                         <label htmlFor="doctorName">Name</label>
-                                                        <input type="text" id="doctorName" name="fullname" placeholder={hospitalData.fullname}
+                                                        <input type="text" id="doctorName" name="fullname" placeholder={hospitalData.name}
                                                             onChange={onChangeHospital}
                                                         />
                                                     </div>
@@ -132,14 +131,14 @@ export const UpdateReception = () => {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                                {/* <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                                     <div className="fields">
                                                         <label htmlFor="doctorName">Branch</label>
                                                         <input type="text" id="doctorName" name="branch" placeholder={hospitalData.branch}
                                                             onChange={onChangeHospital}
                                                         />
                                                     </div>
-                                                </div>
+                                                </div> */}
 
                                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                                     <div className="fields">

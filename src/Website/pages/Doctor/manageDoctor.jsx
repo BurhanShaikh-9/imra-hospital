@@ -13,15 +13,15 @@ import { ReceptionService } from '../../../services/receptionist';
 
 export const DoctorManage = () => {
     const { getAllDoctor, deleteSingleDoctor } = DoctorService();
-    const { getAllReceptionist, deleteSingleReceptionist} = ReceptionService();
+    // const { getAllReceptionist, deleteSingleReceptionist } = ReceptionService();
 
     const [data, setData] = useState([])
     useEffect(() => {
         fetchData()
     }, [])
     const fetchData = () => {
-        getAllReceptionist().then((res) => {
-            // console.log(res?.data, 'responseee')
+        getAllDoctor().then((res) => {
+
             setData(res?.data?.doctors)
         }).catch((res) => {
             console.log(res, 'error');
@@ -56,7 +56,7 @@ export const DoctorManage = () => {
     const [deleteHospitalId, setDeleteHospitalId] = useState('')
 
     const onDeleteHospital = () => {
-        deleteSingleReceptionist(deleteHospitalId).then((res) => {
+        deleteSingleDoctor(deleteHospitalId).then((res) => {
             console.log(res, 'response');
             setModalIsOpen(false);
             fetchData()

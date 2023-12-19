@@ -10,16 +10,16 @@ export const ReceptionService = () => {
         return axiosInstance.post(`${baseUrl}/create-reception`, data);
     }
     const getAllReceptionist = () =>{
-        return axiosInstance.get(`${baseUrl}/all-hospitals`);
+        return axiosInstance.get(`${baseUrl}/all-receptions`);
     }
     const getSingleReceptionist = (id) =>{
         return axiosInstance.get(`${baseUrl}/single-reception/${id}`);
     }
     const patchReceptionist = (id, data) =>{
-        return axiosInstance.patch(`${baseUrl}/update-hospital/${id}`, data);
+        return axiosInstance.patch(`${baseUrl}/recption-update/${id}`, data);
     }
     const deleteSingleReceptionist = (id) =>{
-        return axiosInstance.delete(`${baseUrl}/delete-hospital/${id}`);
+        return axiosInstance.delete(`${baseUrl}/delete-receptions/${id}`);
     }
 
   return {postAddReceptionist, getAllReceptionist, getSingleReceptionist, patchReceptionist, deleteSingleReceptionist}

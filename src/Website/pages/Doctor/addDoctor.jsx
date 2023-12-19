@@ -42,7 +42,7 @@ export const AddDoctor = () => {
 
         console.log(formData, 'hosss');
 
-        postAddReceptionist(formData).then((res) => {
+        postAddDoctor(formData).then((res) => {
             console.log(res, 'response');
             toast.success('Doctor Added')
         }).catch((res) => {

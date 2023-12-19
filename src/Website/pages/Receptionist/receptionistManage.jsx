@@ -21,8 +21,8 @@ export const ReceptionManage = () => {
 
     const fetchData = () =>{
         getAllReceptionist().then((res) => {
-            setData(res?.data?.hospitals)
-            console.log(res?.data?.hospitals, 'responseee')
+            setData(res?.data?.receptions)
+            console.log(res?.data?.receptions, 'responseee')
         }).catch((res) => {
             console.log(res, 'error');
         })
@@ -31,18 +31,18 @@ export const ReceptionManage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [pageNumber, setPageNumber] = useState(0);
     const handlePageClick = (data) => {
-        const selectedPage = data.selected;
+        const selectedPage = data?.selected;
         setPageNumber(selectedPage);
     };
     const itemsPerPage = 8;
     const startIndex = pageNumber * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const pageCount = Math.ceil(data.length / itemsPerPage);
-    const currentItems = data.filter((item) => {
+    const pageCount = Math.ceil(data?.length / itemsPerPage);
+    const currentItems = data?.filter((item) => {
         if (searchTerm === '') {
             return item;
         } else if (
-            item.fullname.toLowerCase().includes(searchTerm.toLowerCase())
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
         ) {
             return item;
         }
@@ -53,7 +53,7 @@ export const ReceptionManage = () => {
     };
 
     const [modalIsOpen, setModalIsOpen] = useState(false)
-    const [deleteHospitalId, setDeleteHospitalId] = useState('')
+    const [deleteHospitalId, setDeleteReceptionId] = useState('')
 
     const onDeleteHospital = () => {
         deleteSingleReceptionist(deleteHospitalId).then((res) => {
@@ -92,26 +92,26 @@ export const ReceptionManage = () => {
                                                 {/* <th scope="col">User Id</th> */}
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">Branch</th>
+                                                <th scope="col">Address</th>
                                                 <th scope="col">Phone</th>
                                                 <th scope="col">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
-                                            {currentItems.map((item, keyid) => {
+                                            {currentItems?.map((item, keyid) => {
                                                 return (
                                                     <tr key={keyid}>
-                                                        <td>{item?.fullname}</td>
+                                                        <td>{item?.name}</td>
                                                         <td>{item?.email}</td>
-                                                        <td>{item?.branch}</td>
+                                                        <td>{item?.address}</td>
                                                         <td>{item?.phonenumber}</td>
                                                         <td>
                                                             <div className="actionButtons">
-                                                                <Link to={`/${ROUTES.UPDATE_HOSPITAL}/${item._id}`}>
+                                                                <Link to={`/${ROUTES.UPDATE_RECEPTION}/${item._id}`}>
                                                                     <BiMessageSquareEdit />
                                                                 </Link>
-                                                                <Link onClick={() => { setModalIsOpen(true); setDeleteHospitalId(item._id) }}>
+                                                                <Link onClick={() => { setModalIsOpen(true); setDeleteReceptionId(item._id) }}>
                                                                     <FiTrash />
                                                                 </Link>
                                                             </div>

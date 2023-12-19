@@ -11,7 +11,7 @@ import { ReceptionService } from '../../../services/receptionist';
 export const UpdateDoctor = () => {
     const { doctorId } = useParams();
     const { getSingleDoctor, patchUpdateDoctor } = DoctorService();
-    const { getSingleReceptionist, patchReceptionist } = ReceptionService();
+    // const { getSingleReceptionist, patchReceptionist } = ReceptionService();
 
 
 
@@ -43,7 +43,7 @@ export const UpdateDoctor = () => {
 
         // console.log(formData, 'hosss');
 
-        patchReceptionist(doctorId, formData).then((res) => {
+        patchUpdateDoctor(doctorId, formData).then((res) => {
             console.log(res, 'response');
         }).catch((res) => {
             console.log(res, 'error');
@@ -53,7 +53,7 @@ export const UpdateDoctor = () => {
     }
 
     useEffect(() => {
-        getSingleReceptionist(doctorId).then((res) => {
+        getSingleDoctor(doctorId).then((res) => {
             const { __v, _id, ...newgetData } = res?.data?.doctor
             setHospitalData(newgetData)
             console.log(newgetData)
