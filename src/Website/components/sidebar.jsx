@@ -113,11 +113,11 @@ export const Sidebar = () => {
                                 :
                                 <React.Fragment />
                         }
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.ALL_PATIENTS}>
                                 <FaUserInjured className='sideIcon' /><span>Patients</span>
                             </NavLink>
-                        </li>
+                        </li> */}
 
                         <li className="nav-item">
                             <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.PROFILE}>

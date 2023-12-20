@@ -8,7 +8,7 @@ export const DashboardService = () => {
     const { axiosInstance } = AxiosSettings()
    
     const getDashboardData = () =>{
-        return axiosInstance.get(`${baseUrl}/dishboard`);
+        return axiosInstance.get(`${baseUrl}/hospital-dishboard`);
     }
    
   return {getDashboardData}
