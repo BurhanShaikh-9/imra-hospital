@@ -8,7 +8,7 @@ export const AdminService = () => {
     const { axiosInstance } = AxiosSettings()
 
     const getSingleAdmin = (id) => {
-        return axiosInstance.get(`${baseUrl}/single-admin/${id}`);
+        return axiosInstance.get(`${baseUrl}/hospital/${id}`);
     };    
 
     const getAllAdmin = () => {
@@ -21,7 +21,7 @@ export const AdminService = () => {
         return axiosInstance.patch(`${baseUrl}/toggle-active-status/${id}`);
     };
     const patchAdmin = (data, id) => {
-        return axiosInstance.patch(`${baseUrl}/admin-update/${id}`, data);
+        return axiosInstance.patch(`${baseUrl}/update-hospital/${id}`, data);
     };
     // const getSingleAdmin = (id) => {
     //     return axiosInstance.get(`${baseUrl}/api-admin/management/single-admin/${id}`);

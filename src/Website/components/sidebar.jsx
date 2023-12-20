@@ -20,6 +20,7 @@ import { AdminService } from '../../services/admin';
 import { LiaLaptopMedicalSolid } from "react-icons/lia";
 import { IoIosLogOut } from "react-icons/io";
 import AuthService from '../../services/auth.service';
+import { FaUserInjured } from "react-icons/fa6";
 
 export const Sidebar = () => {
 
@@ -35,11 +36,12 @@ export const Sidebar = () => {
     let userId = getUserCookie()
     const [userObject, setUserObject] = useState({});
 
+
     useEffect(() => {
         if (userId) {
             getSingleAdmin(userId).then((res) => {
-                setUserObject(res?.data?.admin)
-                // console.log(res?.data?.data, 'userrr');
+                setUserObject(res?.data?.hospital)
+                console.log(res?.data?.hospital, 'userrr');
             }).catch((err) => {
                 console.log(err, 'err');
             })
@@ -67,42 +69,65 @@ export const Sidebar = () => {
                                 <RxDashboard className='sideIcon' /><span>Dashboard</span>
                             </NavLink>
                         </li>
+                        {
+                            userObject.add_recption ?
+                                < li className="nav-item">
+                                    <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.ADD_RECEPTION}>
+                                        <RiHospitalLine className='sideIcon' /><span>Add Reception</span>
+                                    </NavLink>
+                                </li>
+                                :
+                                <React.Fragment />
+                        }
+                        {
+                            userObject.manage_recption ?
 
-                        <li className="nav-item">
-                            <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.ADD_RECEPTION}>
-                                <RiHospitalLine className='sideIcon' /><span>Add Reception</span>
-                            </NavLink>
-                        </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.MANAGE_RECEPTION}>
+                                        <GiHospitalCross className='sideIcon' /><span>Manage Reception</span>
+                                    </NavLink>
+                                </li>
+                                :
+                                <React.Fragment />
+                        }
 
-                        <li className="nav-item">
-                            <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.MANAGE_RECEPTION}>
-                                <GiHospitalCross className='sideIcon' /><span>Manage Reception</span>
-                            </NavLink>
-                        </li>
+                        {
+                            userObject.add_doctor ?
+                                <li className="nav-item">
+                                    <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.ADD_DOCTOR}>
+                                        <FaUserDoctor className='sideIcon' /><span>Add Doctor</span>
+                                    </NavLink>
+                                </li>
+                                :
+                                <React.Fragment />
+                        }
 
 
-                        <li className="nav-item">
-                            <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.ADD_DOCTOR}>
-                                <FaUserDoctor className='sideIcon' /><span>Add Doctor</span>
-                            </NavLink>
-                        </li>
-
-
-
-                        <li className="nav-item">
-                            <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.MANAGE_DOCTOR}>
-                                <LiaLaptopMedicalSolid className='sideIcon' /><span>Manage Doctor</span>
-                            </NavLink>
-                        </li>
+                        {
+                            userObject.manage_doctor ?
+                                <li className="nav-item">
+                                    <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.MANAGE_DOCTOR}>
+                                        <LiaLaptopMedicalSolid className='sideIcon' /><span>Manage Doctor</span>
+                                    </NavLink>
+                                </li>
+                                :
+                                <React.Fragment />
+                        }
                         <li className="nav-item">
                             <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.ALL_PATIENTS}>
-                                <LiaLaptopMedicalSolid className='sideIcon' /><span>Patients</span>
+                                <FaUserInjured className='sideIcon' /><span>Patients</span>
                             </NavLink>
                         </li>
 
                         <li className="nav-item">
                             <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.PROFILE}>
                                 <AiOutlineUser className='sideIcon' /><span>Profile</span>
+                            </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                            <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.FAQS}>
+                                <CgFileDocument className='sideIcon' /> <span>Faqs</span>
                             </NavLink>
                         </li>
 
@@ -115,7 +140,7 @@ export const Sidebar = () => {
 
                     </ul>
                 </div>
-            </aside>
+            </aside >
 
             {modalIsOpen &&
                 <dialog id='confirmationModal' className='modalMain' open>

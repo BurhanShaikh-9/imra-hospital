@@ -27,23 +27,19 @@ export const Login = () => {
         const loginData = { ...login }
 
         postAdminLogin(loginData).then((res) => {
-            console.log(res.data, 'resssss');
+            console.log(res.data.Hospital, 'resssss');
             const loginResponse = res
-            getSingleAdmin(res?.data.data.id).then((res) => {
-                const response = res?.data?.admin
+            // console.log(loginResponse, 'reqqqqqqq');
+            getSingleAdmin(res?.data.Hospital?._id).then((res) => {
+                // console.log(res?.data,'ggggggg');
+                const response = res?.data?.hospital
                 const { avatar, email, fullname, is_active, phonenumber, title, type, __v, _id, ...routesPerm } = response;
 
-                console.log(routesPerm, 'ressss');
+                // console.log(routesPerm, 'ressss');
                 let otherRoutes;
                 const routeMapping = {
-                    dashboard: ROUTES.DASHBOARD,
-                    manageUser: ROUTES.MANAGE_USER,
-                    services: ROUTES.FAQS,
-                    manageAdmin: ROUTES.ADMIN_MANAGE,
-                    addAdmin: ROUTES.ADD_ADMIN,
-                    addHospital: ROUTES.ADD_HOSPITAL,
-                    manageHospital: ROUTES.MANAGE_HOSPITAL,
-                    reception: ROUTES.RECEPTIONIST,
+                    add_recption: ROUTES.ADD_RECEPTION,
+                    manage_recption: ROUTES.MANAGE_RECEPTION,
                     add_doctor: ROUTES.ADD_DOCTOR,
                     manage_doctor: ROUTES.MANAGE_DOCTOR,
                 };
@@ -59,7 +55,7 @@ export const Login = () => {
                 } else {
                     // navigate(ROUTES.DASHBOARD);
                     console.log(routeMapping.dashboard, 'dashhh');
-                    successLogin(loginResponse?.data, null , otherRoutes = 0)
+                    successLogin(loginResponse?.data, null, otherRoutes = 0)
 
                 }
 

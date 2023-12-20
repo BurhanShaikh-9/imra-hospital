@@ -32,8 +32,8 @@ export const ExternalRoutes = () => {
     useEffect(() => {
         if (userId) {
             getSingleAdmin(userId).then((res) => {
-                console.log(res.data.data, 'response routeesss');
-                setUserObject(res?.data?.admin)
+                // console.log(res.data.data, 'response routeesss');
+                setUserObject(res?.data?.hospital)
             }).catch((err) => {
                 console.log(err, 'err');
             })
@@ -47,13 +47,29 @@ export const ExternalRoutes = () => {
                 <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
 
                 <Route path={ROUTES.ADD_RECEPTION} element={<AddReception />} />
-                <Route path={ROUTES.MANAGE_RECEPTION} element={<ReceptionManage />} />
-                <Route path={`${ROUTES.UPDATE_RECEPTION}/:receptionistId`} element={<UpdateReception />} />
-                <Route path={ROUTES.MANAGE_USER} element={<UserManage />} />
+                {
+                    userObject.add_recption &&
+                    <Route path={ROUTES.MANAGE_RECEPTION} element={<ReceptionManage />} />
+                }
+                {
+                    userObject.manage_recption &&
+                    <React.Fragment>
+                        <Route path={`${ROUTES.UPDATE_RECEPTION}/:receptionistId`} element={<UpdateReception />} />
+                        <Route path={ROUTES.MANAGE_USER} element={<UserManage />} />
+                    </React.Fragment>
+                }
+                {
+                    userObject.add_doctor &&
+                    <Route path={ROUTES.ADD_DOCTOR} element={<AddDoctor />} />
+                }
+                {
+                    userObject.manage_doctor &&
+                    <React.Fragment>
+                        <Route path={ROUTES.MANAGE_DOCTOR} element={<DoctorManage />} />
+                        <Route path={`${ROUTES.UPDATE_DOCTOR}/:doctorId`} element={<UpdateDoctor />} />
+                    </React.Fragment>
+                }
                 <Route path={ROUTES.ALL_PATIENTS} element={<PatientsManage />} />
-                <Route path={ROUTES.ADD_DOCTOR} element={<AddDoctor />} />
-                <Route path={ROUTES.MANAGE_DOCTOR} element={<DoctorManage />} />
-                <Route path={`${ROUTES.UPDATE_DOCTOR}/:doctorId`} element={<UpdateDoctor />} />
                 <Route path={ROUTES.FAQS} element={<Faqs />} />
                 <Route path={ROUTES.PROFILE} element={<Profile />} />
             </Route>

@@ -14,15 +14,15 @@ const AuthService = () => {
     const { saveCookie, deleteCookie, deleteUserCookie, saveUserCookie } = TokenService();
 
     const postAdminLogin = (data) => {
-        return axiosInstance.post(`${baseUrl}/sign-in-admin`, data);
+        return axiosInstance.post(`${baseUrl}/login-hospital`, data);
     };
 
     const successLogin = (response, routeName, isDashboard) => {
-        console.log(routeName, 'resqssssssssssssssssssss');
-        console.log(response, 'respppp');
-        if (response.success == 1) {
+        // console.log(routeName, 'resqssssssssssssssssssss');
+        // console.log(response.Hospital, 'respppp');
+        if (response.success != 'false') {
             console.log('workingggg');
-            saveUserCookie(response.data?.id)
+            saveUserCookie(response.Hospital?._id)
             saveCookie(response.token)
             if (isDashboard && routeName) {
                 navigate(`/${routeName}`)

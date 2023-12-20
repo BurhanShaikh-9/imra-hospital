@@ -16,11 +16,11 @@ const TokenService = () => {
 
 
   function saveCookie(token) {
-    Cookies.set('userToken_imra', token, cookieAttributes);
+    Cookies.set('hospitalToken_imra', token, cookieAttributes);
   }
 
   function deleteCookie() {
-    document.cookie = "userToken_imra=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "hospitalToken_imra=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     console.log('cookieDeleted');
   }
 
@@ -30,7 +30,7 @@ const TokenService = () => {
 
     for (const cookie of cookies) {
       const [cookieName, cookieValue] = cookie.split('=');
-      if (cookieName === 'userToken_imra') {
+      if (cookieName === 'hospitalToken_imra') {
         return decodeURIComponent(cookieValue);
       }
     }
@@ -39,11 +39,11 @@ const TokenService = () => {
 
 
   function saveUserCookie(userId) {
-    Cookies.set('userId_imra', userId, cookieAttributes);
+    Cookies.set('hospitalId_imra', userId, cookieAttributes);
   }
 
   function deleteUserCookie() {
-    document.cookie = "userId_imra=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = " =; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     console.log('cookieUserDeleted');
   }
 
@@ -53,7 +53,7 @@ const TokenService = () => {
 
     for (const cookie of cookies) {
       const [cookieName, cookieValue] = cookie.split('=');
-      if (cookieName === 'userId_imra') {
+      if (cookieName === 'hospitalId_imra') {
         return decodeURIComponent(cookieValue);
       }
     }

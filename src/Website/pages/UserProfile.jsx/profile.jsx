@@ -17,10 +17,10 @@ export const Profile = () => {
     useEffect(() => {
         if (userId) {
             getSingleAdmin(userId).then((res) => {
-                console.log(res.data, 'adminss');
-                const { addAdmin, addHospital, manageAdmin, manageHospital, services, ...filteredAdminData } = res?.data?.admin;
+                // console.log(res.data, 'adminss');
+                const { add_doctor, add_recption, manage_doctor, manage_recption, __v, _id, ...filteredAdminData } = res?.data?.hospital;
                 setUserObject(filteredAdminData)
-                console.log(filteredAdminData, 'res');
+                console.log(filteredAdminData, 'hospitalProfile');
             }).catch((err) => {
                 console.log(err, 'err');
             })
@@ -57,15 +57,8 @@ export const Profile = () => {
         formData.set('fullname', userObject.fullname);
         formData.set('email', userObject.email);
         formData.set('phonenumber', userObject.phonenumber);
-        // formData.set('password', adminModel.password);
-        // formData.set('title', adminModel.title);
-        // formData.set('type', adminModel.type);
-        // formData.set('addHospital', adminModel.addHospital);
-        // formData.set('manageHospital', adminModel.manageHospital);
-        // formData.set('addAdmin', adminModel.addAdmin);
-        // formData.set('manageAdmin', adminModel.manageAdmin);
-        // formData.set('services', adminModel.services);
-        // formData.set('is_active', adminModel.is_active);
+        formData.set('branch', userObject.branch);
+
 
         console.log(formData, 'formDataa');
         patchAdmin(formData, userId).then((res) => {
@@ -136,6 +129,13 @@ export const Profile = () => {
                                                     <div className="fields">
                                                         <label htmlFor="doctorName">Phone</label>
                                                         <input type="number" onChange={getInput} id="doctorName" name="phonenumber" placeholder={userObject.phonenumber}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                                    <div className="fields">
+                                                        <label htmlFor="doctorName">Branch</label>
+                                                        <input type="text" onChange={getInput} id="doctorName" name="branch" placeholder={userObject.branch}
                                                         />
                                                     </div>
                                                 </div>

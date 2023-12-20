@@ -21,13 +21,14 @@ export const Header = (props) => {
   const { getUserCookie } = TokenService();
 
   let userId = getUserCookie()
+  // console.log(userId, 'ussssssssssss');
   const [userObject, setUserObject] = useState({});
 
   useEffect(() => {
     if (userId) {
       getSingleAdmin(userId).then((res) => {
-        console.log(userId, 'userrr');
-        const { addAdmin, addHospital, manageAdmin, manageHospital, services, email, phonenumber, ...filteredAdminData } = res?.data?.admin;
+        // console.log(userId, 'userrr');
+        const { addAdmin, addHospital, manageAdmin, manageHospital, services, email, phonenumber, ...filteredAdminData } = res?.data?.hospital;
         setUserObject(filteredAdminData)
         // console.log(filteredAdminData, 'res');
       }).catch((err) => {

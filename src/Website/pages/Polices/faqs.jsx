@@ -79,9 +79,6 @@ export const Faqs = () => {
                       faqs.map((item, keyId) => (
                         <div className="accordion-item" key={keyId}>
                           <h2 className="accordion-header" id={`heading${keyId}`}>
-                            <button className='accordionAbsoulteButton' onClick={(e) => handleServiceDelete(e, item._id)}>
-                              <FiTrash />
-                            </button>
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${keyId}`} aria-expanded="true" aria-controls={`collapse${keyId}`}>
                               {item.faqquestion}
                             </button>
@@ -95,26 +92,7 @@ export const Faqs = () => {
                       ))
                     }
 
-                    {showAddButton &&
-                      <form id='formFaq' onSubmit={onFormSubmit}>
-                        <div className="newSectionOutter">
-                          <div className="newSectionContent">
-                            <p>Add Question</p>
-                            <input type="text" name='faqquestion' onChange={getInput} required />
-                          </div>
-                          <div className="newSectionContent">
-                            <p>Add Answer</p>
-                            <input type="text" name='faqanswers' onChange={getInput} required />
-                          </div>
-                        </div>
-                      </form>
-                    }
-                    <div className="addSectionButton">
-                      {showAddButton &&
-                        <button form="formFaq" type='submit'>Submit</button>
-                      }
-                      <button onClick={() => { setShowAddButton(true) }}>Add Section</button>
-                    </div>
+                  
                   </div>
               }
 
