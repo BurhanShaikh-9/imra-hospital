@@ -1171,13 +1171,24 @@ body:has(.login) {
   margin-bottom: 5px;
 }
 .login .card .card-body .loginOuter .loginBody .fields input[type=email],
-.login .card .card-body .loginOuter .loginBody .fields input[type=password] {
+.login .card .card-body .loginOuter .loginBody .fields input[type=password],
+.login .card .card-body .loginOuter .loginBody .fields input[type=text] {
   width: 100%;
   height: 33px;
   border: 1px solid grey;
   border-radius: 7px;
   outline: none;
   padding: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 .modalMain {
@@ -1322,4 +1333,15 @@ body:has(.login) {
     inset: 0;
     transform: rotate(90deg);
   }
+}
+
+.fieldButtonRelative {
+  position: relative;
+}
+
+.fieldButtonAbsolute {
+  position: absolute !important;
+  right: 10px;
+  bottom: 6px;
+  cursor: pointer;
 }/*# sourceMappingURL=App.css.map */
