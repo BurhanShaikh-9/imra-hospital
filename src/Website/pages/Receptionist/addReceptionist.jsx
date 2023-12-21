@@ -4,11 +4,15 @@ import profilePic from '../../../assets/images/guy.png'
 import { toast } from 'react-toastify';
 import Loader from '../../components/loader';
 import { ReceptionService } from '../../../services/receptionist';
+import TokenService from '../../../services/tokenService';
 
 
 export const AddReception = () => {
     const { postAddReceptionist } = ReceptionService();
+    const { getUserCookie } = TokenService()
     const [isLoading, setIsLoading] = useState(false);
+
+    const hospitalId = getUserCookie();
 
 
     const [receptionData, setReceptionData] = useState({
@@ -37,6 +41,7 @@ export const AddReception = () => {
         formData.set('phonenumber', receptionData.phonenumber);
         formData.set('password', receptionData.password);
         formData.set('address', receptionData.address);
+        formData.set('hospitalId', hospitalId);
 
         console.log(formData, 'hosss');
 

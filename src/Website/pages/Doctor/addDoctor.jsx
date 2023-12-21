@@ -5,9 +5,13 @@ import { DoctorService } from '../../../services/doctor';
 import { toast } from 'react-toastify';
 import Loader from '../../components/loader';
 import { ReceptionService } from '../../../services/receptionist';
+import TokenService from '../../../services/tokenService';
 
 export const AddDoctor = () => {
     const { postAddReceptionist } = ReceptionService();
+    const { getUserCookie } = TokenService()
+
+    const hospitalId = getUserCookie();
 
     const { postAddDoctor } = DoctorService();
     const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +43,7 @@ export const AddDoctor = () => {
         formData.set('pdmaid', doctorData.pdmaid);
         formData.set('experience', doctorData.experience);
         formData.set('qualification', doctorData.qualification);
+        formData.set('hospitalId', hospitalId);
 
         console.log(formData, 'hosss');
 
