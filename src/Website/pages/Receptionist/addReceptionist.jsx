@@ -5,12 +5,14 @@ import { toast } from 'react-toastify';
 import Loader from '../../components/loader';
 import { ReceptionService } from '../../../services/receptionist';
 import TokenService from '../../../services/tokenService';
+import { phoneValidation } from '../../../services/regex';
 
 
 export const AddReception = () => {
     const { postAddReceptionist } = ReceptionService();
     const { getUserCookie } = TokenService()
     const [isLoading, setIsLoading] = useState(false);
+    const [isValidPhone, setIsValidPhone] = useState(false);
 
     const hospitalId = getUserCookie();
 
@@ -23,10 +25,25 @@ export const AddReception = () => {
         address: '',
         avatar: '',
     })
+    const validatePhone = (phone) => {
+        return phoneValidation.test(phone);
+    };
 
     const onChangeHospital = (e) => {
-        setReceptionData({ ...receptionData, [e.target.name]: e.target.value })
-    }
+        const fieldValue = e.target.type === 'checkbox' ? (e.target.checked ? 1 : 0) : e.target.value;
+        const fieldName = e.target.name;
+        if (fieldName === 'phonenumber') {
+            const isValid = validatePhone(fieldValue);
+            // console.log(fieldValue,isValidPhone,'vallll');
+            setIsValidPhone(isValid);
+            if (isValid) {
+                setReceptionData({ ...receptionData, [fieldName]: fieldValue });
+            }
+        } else {
+            setReceptionData({ ...receptionData, [fieldName]: fieldValue });
+        }
+    };
+   
     const onChangeImage = (e) => {
         setReceptionData({ ...receptionData, [e.target.name]: e.target.files[0] })
     }
@@ -112,12 +129,14 @@ export const AddReception = () => {
                                                         />
                                                     </div>
                                                 </div>
+
                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                                    <div className="fields">
+                                                    <div className="fields fieldErrorRelative">
                                                         <label htmlFor="doctorName">Phone</label>
-                                                        <input type="number" id="doctorName" name="phonenumber" placeholder="Enter Phone..."
+                                                        <input className={!isValidPhone && 'errorValidation'} type="number" id="doctorName" name="phonenumber" placeholder="Enter Phone..."
                                                             onChange={onChangeHospital} required
                                                         />
+                                                        {!isValidPhone && <p className='erroValidationText'>Invalid Phone Number</p>}
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
@@ -140,7 +159,7 @@ export const AddReception = () => {
 
                                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                                     <div className="fields">
-                                                        <button type="Submit" >
+                                                        <button type="Submit" disabled={!isValidPhone}>
                                                             Submit
                                                         </button>
                                                     </div>

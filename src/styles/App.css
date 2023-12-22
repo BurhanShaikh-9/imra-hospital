@@ -1344,4 +1344,16 @@ input[type=number] {
   right: 10px;
   bottom: 6px;
   cursor: pointer;
+}
+
+.fieldErrorRelative {
+  position: relative;
+}
+.fieldErrorRelative .errorValidation {
+  border: 1px solid red !important;
+}
+.fieldErrorRelative .erroValidationText {
+  position: absolute;
+  color: red;
+  bottom: -37px;
 }/*# sourceMappingURL=App.css.map */

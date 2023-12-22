@@ -6,12 +6,14 @@ import { DoctorService } from '../../../services/doctor';
 import { toast } from 'react-toastify';
 import Loader from '../../components/loader';
 import { ReceptionService } from '../../../services/receptionist';
+import { phoneValidation } from '../../../services/regex';
 
 
 export const UpdateDoctor = () => {
     const { doctorId } = useParams();
     const { getSingleDoctor, patchUpdateDoctor } = DoctorService();
     // const { getSingleReceptionist, patchReceptionist } = ReceptionService();
+    const [isValidPhone, setIsValidPhone] = useState(false);
 
 
 
@@ -21,9 +23,28 @@ export const UpdateDoctor = () => {
     })
     const [isLoading, setIsLoading] = useState(false)
 
+    // const onChangeDoctor = (e) => {
+    //     setHospitalData({ ...hospitalData, [e.target.name]: e.target.value })
+    // }
+
+    const validatePhone = (phone) => {
+        return phoneValidation.test(phone);
+    };
+    
     const onChangeDoctor = (e) => {
-        setHospitalData({ ...hospitalData, [e.target.name]: e.target.value })
-    }
+        const fieldValue = e.target.value;
+        const fieldName = e.target.name;
+        if (fieldName === 'phonenumber') {
+            const isValid = validatePhone(fieldValue);
+            setIsValidPhone(isValid);
+            if (isValid) {
+                setHospitalData({ ...hospitalData, [fieldName]: fieldValue });
+            }
+        } else {
+            setHospitalData({ ...hospitalData, [fieldName]: fieldValue });
+        }
+    };
+
     const onChangeImage = (e) => {
         setHospitalData({ ...hospitalData, [e.target.name]: e.target.files[0] })
         setLocalImage({ ...localImage, [e.target.name]: e.target.files[0] })
@@ -45,8 +66,12 @@ export const UpdateDoctor = () => {
 
         patchUpdateDoctor(doctorId, formData).then((res) => {
             console.log(res, 'response');
+            toast.success('Doctor Updated Successfully')
+
         }).catch((res) => {
             console.log(res, 'error');
+            toast.error('Doctor Failed to Update')
+
         }).finally(() => {
             setIsLoading(false);
         })
@@ -57,6 +82,8 @@ export const UpdateDoctor = () => {
             const { __v, _id, ...newgetData } = res?.data?.doctor
             setHospitalData(newgetData)
             console.log(newgetData)
+            const isValidDefaultPhone = validatePhone(newgetData?.phonenumber);
+            setIsValidPhone(isValidDefaultPhone);
         }).catch((res) => {
             console.log(res, 'error');
         })
@@ -124,14 +151,17 @@ export const UpdateDoctor = () => {
                                                         />
                                                     </div>
                                                 </div>
+                                              
                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                                    <div className="fields">
+                                                    <div className="fields fieldErrorRelative">
                                                         <label htmlFor="doctorName">Phone</label>
-                                                        <input type="text" id="doctorName" name="phonenumber" placeholder={hospitalData.phonenumber}
+                                                        <input className={!isValidPhone && 'errorValidation'} type="number" id="doctorName" name="phonenumber" placeholder={hospitalData.phonenumber}
                                                             onChange={onChangeDoctor}
                                                         />
+                                                        {!isValidPhone && <p className='erroValidationText'>Invalid Phone Number</p>}
                                                     </div>
                                                 </div>
+                                                
                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                                     <div className="fields">
                                                         <label htmlFor="doctorName">Qualification</label>
@@ -151,7 +181,7 @@ export const UpdateDoctor = () => {
 
                                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                                     <div className="fields">
-                                                        <button type="Submit" >
+                                                        <button type="Submit" disabled={!isValidPhone} >
                                                             Submit
                                                         </button>
                                                     </div>

@@ -1576,3 +1576,18 @@ input[type="number"] {
   bottom: 6px;
   cursor: pointer;
 }
+
+
+.fieldErrorRelative {
+  position: relative;
+
+  .errorValidation {
+    border: 1px solid red !important;
+  }
+
+  .erroValidationText {
+    position: absolute;
+    color: red;
+    bottom: -37px;
+  }
+}

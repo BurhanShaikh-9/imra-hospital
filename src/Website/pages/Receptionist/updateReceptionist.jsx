@@ -5,10 +5,12 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loader from '../../components/loader';
 import { ReceptionService } from '../../../services/receptionist';
+import { phoneValidation } from '../../../services/regex';
 
 export const UpdateReception = () => {
     const { receptionistId } = useParams();
     const { getSingleReceptionist, patchReceptionist } = ReceptionService();
+    const [isValidPhone, setIsValidPhone] = useState(false);
 
     // const { patchUpdateHospital, getSingleHospital } = HospitalService();
     const [isLoading, setIsLoading] = useState(false)
@@ -18,9 +20,24 @@ export const UpdateReception = () => {
         avatar: ''
     })
 
+   
+    const validatePhone = (phone) => {
+        return phoneValidation.test(phone);
+    };
+    
     const onChangeHospital = (e) => {
-        setHospitalData({ ...hospitalData, [e.target.name]: e.target.value })
-    }
+        const fieldValue =  e.target.value;
+        const fieldName = e.target.name;
+        if (fieldName === 'phonenumber') {
+            const isValid = validatePhone(fieldValue);
+            setIsValidPhone(isValid);
+            if (isValid) {
+                setHospitalData({ ...hospitalData, [fieldName]: fieldValue });
+            }
+        } else {
+            setHospitalData({ ...hospitalData, [fieldName]: fieldValue });
+        }
+    };
     const onChangeImage = (e) => {
         setHospitalData({ ...hospitalData, [e.target.name]: e.target.files[0] })
         setLocalImage({ ...localImage, [e.target.name]: e.target.files[0] })
@@ -53,7 +70,8 @@ export const UpdateReception = () => {
             console.log(res, 'response Receptionist');
             const { __v, _id, ...newgetData } = res?.data?.reception
             setHospitalData(newgetData)
-
+            const isValidDefaultPhone = validatePhone(newgetData.phonenumber);
+            setIsValidPhone(isValidDefaultPhone);
             // console.log(res)
         }).catch((res) => {
             console.log(res, 'error');
@@ -102,7 +120,7 @@ export const UpdateReception = () => {
                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                                     <div className="fields">
                                                         <label htmlFor="doctorName">Name</label>
-                                                        <input type="text" id="doctorName" name="fullname" placeholder={hospitalData.name}
+                                                        <input type="text" id="doctorName" name="name" placeholder={hospitalData.name}
                                                             onChange={onChangeHospital}
                                                         />
                                                     </div>
@@ -115,12 +133,14 @@ export const UpdateReception = () => {
                                                         />
                                                     </div>
                                                 </div>
+                                            
                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                                    <div className="fields">
+                                                    <div className="fields fieldErrorRelative">
                                                         <label htmlFor="doctorName">Phone</label>
-                                                        <input type="number" id="doctorName" name="phonenumber" placeholder={hospitalData.phonenumber}
+                                                        <input className={!isValidPhone && 'errorValidation'} type="number" id="doctorName" name="phonenumber" placeholder={hospitalData.phonenumber}
                                                             onChange={onChangeHospital}
                                                         />
+                                                        {!isValidPhone && <p className='erroValidationText'>Invalid Phone Number</p>}
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
@@ -142,7 +162,7 @@ export const UpdateReception = () => {
 
                                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                                     <div className="fields">
-                                                        <button type="Submit" >
+                                                        <button type="Submit" disabled={!isValidPhone} >
                                                             Submit
                                                         </button>
                                                     </div>
