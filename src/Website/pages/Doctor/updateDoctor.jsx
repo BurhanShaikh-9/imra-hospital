@@ -13,7 +13,7 @@ export const UpdateDoctor = () => {
     const { doctorId } = useParams();
     const { getSingleDoctor, patchUpdateDoctor } = DoctorService();
     // const { getSingleReceptionist, patchReceptionist } = ReceptionService();
-    const [isValidPhone, setIsValidPhone] = useState(false);
+    const [isValidPhone, setIsValidPhone] = useState(true);
 
 
 

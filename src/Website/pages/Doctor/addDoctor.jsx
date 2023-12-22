@@ -11,7 +11,7 @@ import { phoneValidation } from '../../../services/regex';
 export const AddDoctor = () => {
     const { postAddReceptionist } = ReceptionService();
     const { getUserCookie } = TokenService()
-    const [isValidPhone, setIsValidPhone] = useState(false);
+    const [isValidPhone, setIsValidPhone] = useState(true);
 
     const hospitalId = getUserCookie();
 

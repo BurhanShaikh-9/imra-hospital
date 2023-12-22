@@ -12,7 +12,7 @@ export const AddReception = () => {
     const { postAddReceptionist } = ReceptionService();
     const { getUserCookie } = TokenService()
     const [isLoading, setIsLoading] = useState(false);
-    const [isValidPhone, setIsValidPhone] = useState(false);
+    const [isValidPhone, setIsValidPhone] = useState(true);
 
     const hospitalId = getUserCookie();
 

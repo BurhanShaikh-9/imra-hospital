@@ -10,7 +10,7 @@ import { phoneValidation } from '../../../services/regex';
 export const UpdateReception = () => {
     const { receptionistId } = useParams();
     const { getSingleReceptionist, patchReceptionist } = ReceptionService();
-    const [isValidPhone, setIsValidPhone] = useState(false);
+    const [isValidPhone, setIsValidPhone] = useState(true);
 
     // const { patchUpdateHospital, getSingleHospital } = HospitalService();
     const [isLoading, setIsLoading] = useState(false)
